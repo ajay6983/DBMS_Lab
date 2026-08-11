@@ -1,0 +1,39 @@
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+STUDENT                        TABLE                                            
+EMPLOYEE                       TABLE                                            
+CUSTOMER2                      TABLE                                            
+CUSTOMER1                      TABLE                                            
+CUSTOMER                       TABLE                                            
+
+SQL> select * from Student;
+
+STUDENT_ID FIRST_NAME           LAST_NAME                   AGE        GPA      
+---------- -------------------- -------------------- ---------- ----------      
+ENROLLMEN REG_NO                                                                
+--------- --------------------                                                  
+         1 AJAY                 TVS                          19       8.83      
+11-JUL-26                                                                       
+                                                                                
+         1 AJAY                 TVS                          19       8.83      
+11-JUL-26                                                                       
+                                                                               
+SQL> select * from Customer;
+
+    CUSTID CUSNAME                        PHONE CITY                            
+---------- ------------------------- ---------- --------------------            
+       123 Ajay                      6302346885 MBNR                            
+       456 ram                       6252346885 hyd                             
+       789 Eswara                    7203452534 RJY                             
+
+SQL> select * from Customer;
+
+    CUSTID CUSNAME                        PHONE CITY                            
+---------- ------------------------- ---------- --------------------            
+       123 Ajay                      6302346885 MBNR                            
+       456 ram                       6252346885 hyd                             
+       789 Eswara                    7203452534 RJY                             
+
+SQL> spool off
