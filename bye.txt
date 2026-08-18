@@ -1,0 +1,92 @@
+
+SQL*Plus: Release 11.2.0.1.0 Production on Tue Aug 18 13:55:59 2026
+
+Copyright (c) 1982, 2010, Oracle.  All rights reserved.
+
+Enter user-name: A009@db2021
+Enter password:
+ERROR:
+ORA-01017: invalid username/password; logon denied
+
+
+Enter user-name: A009@db2021
+Enter password:
+
+Connected to:
+Oracle Database 11g Release 11.2.0.1.0 - Production
+
+SQL> Spool D:/11249A009/180826.txt
+SQL> select * class;
+select * class
+         *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select *from class;
+
+no rows selected
+
+SQL> INSERT INTO class VALUES (101, 'Rahul', 20, 'Male', 'BCA', 85),
+  2  INSERT INTO class VALUES (102, 'Priya', 21, 'Female', 'BCA', 90),
+  3  INSERT INTO class VALUES (103, 'Amit', 19, 'Male', 'BSc', 78);
+INSERT INTO class VALUES (101, 'Rahul', 20, 'Male', 'BCA', 85),
+                                                              *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> INSERT INTO class VALUES (103, 'Amit', 19, 'Male', 'BSc', 78);
+
+1 row created.
+
+SQL> INSERT INTO class VALUES (102, 'Priya', 21, 'Female', 'BCA', 90),
+  2  ;
+INSERT INTO class VALUES (102, 'Priya', 21, 'Female', 'BCA', 90),
+                                                                *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> INSERT INTO class VALUES (102, 'Priya', 21, 'Female', 'BCA', 90);
+
+1 row created.
+
+SQL> INSERT INTO class VALUES (101, 'Rahul', 20, 'Male', 'BCA', 85);
+
+1 row created.
+
+SQL> SELECT * FROM STUDENT;
+
+STUDENT_ID FIRST_NAME           LAST_NAME                   AGE        GPA ENROLLMEN REG_NO
+---------- -------------------- -------------------- ---------- ---------- --------- --------------------
+         1 AJAY                 TVS                          19       8.83 11-JUL-26
+         1 AJAY                 TVS                          19       8.83 11-JUL-26
+
+SQL> SELECT * FROM STUDENT;
+
+STUDENT_ID FIRST_NAME           LAST_NAME                   AGE        GPA ENROLLMEN REG_NO
+---------- -------------------- -------------------- ---------- ---------- --------- --------------------
+         1 AJAY                 TVS                          19       8.83 11-JUL-26
+         1 AJAY                 TVS                          19       8.83 11-JUL-26
+
+SQL> SELECT * FROM STUDENT;
+
+STUDENT_ID FIRST_NAME           LAST_NAME                   AGE        GPA ENROLLMEN REG_NO
+---------- -------------------- -------------------- ---------- ---------- --------- --------------------
+         1 AJAY                 TVS                          19       8.83 11-JUL-26
+         1 AJAY                 TVS                          19       8.83 11-JUL-26
+
+SQL> select *from class;
+
+STUDENT_ID STUDENT_NAME                                              AGE GENDER     COURSE
+        MARKS
+---------- -------------------------------------------------- ---------- ---------- ------------------------------ ----------
+       103 Amit                                                       19 Male       BSc
+           78
+       102 Priya                                                      21 Female     BCA
+           90
+       101 Rahul                                                      20 Male       BCA
+           85
+
+SQL>
