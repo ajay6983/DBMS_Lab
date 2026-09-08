@@ -1,0 +1,380 @@
+SQL> CREATE TABLE STUDENT
+  2  (
+  3   STUDENT_ID NUMBER(5) PRIMARY KEY,
+  4   STUDENT_NAME VARCHAR2(30),
+  5   DEPARTMENT VARCHAR2(20),
+  6   AGE NUMBER(2),
+  7   MARKS NUMBER(3)
+  8  );
+CREATE TABLE STUDENT
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> CREATE TABLE STUDENT
+  2  (
+  3   STUDENT_ID NUMBER(5) PRIMARY KEY,
+  4   STUDENT_NAME VARCHAR2(30),
+  5   DEPARTMENT VARCHAR2(20),
+  6   AGE NUMBER(2),
+  7   MARKS NUMBER(3)
+  8  );
+CREATE TABLE STUDENT
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> CREATE TABLE STUDENT1
+  2  (
+  3   STUDENT_ID NUMBER(5) PRIMARY KEY,
+  4   STUDENT_NAME VARCHAR2(30),
+  5   DEPARTMENT VARCHAR2(20),
+  6   AGE NUMBER(2),
+  7   MARKS NUMBER(3)
+  8  );
+
+Table created.
+
+SQL> INSERT INTO STUDENT VALUES (101,'AJAY','CSE',20,85);
+INSERT INTO STUDENT VALUES (101,'AJAY','CSE',20,85)
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> INSERT INTO STUDENT VALUES (102,'VISHAL','ECE',21,78);
+INSERT INTO STUDENT VALUES (102,'VISHAL','ECE',21,78)
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> INSERT INTO STUDENT VALUES (103,'ABHI','CSE',20,92);
+INSERT INTO STUDENT VALUES (103,'ABHI','CSE',20,92)
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> INSERT INTO STUDENT VALUES (101,'AJAY','CSE',20,85),
+  2  INSERT INTO STUDENT VALUES (102,'VISHAL','ECE',21,78),
+  3  INSERT INTO STUDENT VALUES (103,'ABHI','CSE',20,92),
+  4  INSERT INTO STUDENT VALUES (104,'KARTHIK','IT',21,88);
+INSERT INTO STUDENT VALUES (101,'AJAY','CSE',20,85),
+                                                   *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> INSERT INTO STUDENT VALUES (102,'VISHAL','ECE',21,78),
+  2  INSERT INTO STUDENT VALUES (103,'ABHI','CSE',20,92),
+  3  INSERT INTO STUDENT VALUES (104,'KARTHIK','IT',21,88);
+INSERT INTO STUDENT VALUES (102,'VISHAL','ECE',21,78),
+                                                     *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> INSERT INTO STUDENT VALUES (101,'AJAY','CSE',20,85);
+INSERT INTO STUDENT VALUES (101,'AJAY','CSE',20,85)
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> INSERT INTO STUDENT1 VALUES (101,'AJAY','CSE',20,85);
+
+1 row created.
+
+SQL> INSERT INTO STUDENT1 VALUES (102,'VISHAL','ECE',21,78),
+  2  INSERT INTO STUDENT1 VALUES (103,'ABHI','CSE',20,92),
+  3  INSERT INTO STUDENT1 VALUES (104,'KARTHIK','IT',21,88);
+INSERT INTO STUDENT1 VALUES (102,'VISHAL','ECE',21,78),
+                                                      *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> INSERT INTO STUDENT1 VALUES (102,'VISHAL','ECE',21,78);
+
+1 row created.
+
+SQL> INSERT INTO STUDENT1 VALUES (103,'ABHI','CSE',20,92);
+
+1 row created.
+
+SQL> INSERT INTO STUDENT1 VALUES (104,'KARTHIK','IT',21,88);
+
+1 row created.
+
+SQL> SELECT *FROM STUDENT1;
+
+STUDENT_ID STUDENT_NAME                   DEPARTMENT                  AGE      MARKS                                                                                                                    
+---------- ------------------------------ -------------------- ---------- ----------                                                                                                                    
+       101 AJAY                           CSE                          20         85                                                                                                                    
+       102 VISHAL                         ECE                          21         78                                                                                                                    
+       103 ABHI                           CSE                          20         92                                                                                                                    
+       104 KARTHIK                        IT                           21         88                                                                                                                    
+
+SQL> SELECT STUDENT1_NAME, MARKS
+  2  FROM STUDENT1;
+SELECT STUDENT1_NAME, MARKS
+       *
+ERROR at line 1:
+ORA-00904: "STUDENT1_NAME": invalid identifier 
+
+
+SQL> SELECT STUDENT1_NAME,MARKS,FROM STUDENT1;
+SELECT STUDENT1_NAME,MARKS,FROM STUDENT1
+                           *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> SELECT STUDENT_NAME,MARKS,FROM STUDENT1;
+SELECT STUDENT_NAME,MARKS,FROM STUDENT1
+                          *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> SELECT STUDENT_NAME, MARKS
+  2  FROM STUDENT1;
+
+STUDENT_NAME                        MARKS                                                                                                                                                               
+------------------------------ ----------                                                                                                                                                               
+AJAY                                   85                                                                                                                                                               
+VISHAL                                 78                                                                                                                                                               
+ABHI                                   92                                                                                                                                                               
+KARTHIK                                88                                                                                                                                                               
+
+SQL> SELECT *
+  2  FROM STUDENT1
+  3  WHERE DEPARTMENT = 'CSE';
+
+STUDENT_ID STUDENT_NAME                   DEPARTMENT                  AGE      MARKS                                                                                                                    
+---------- ------------------------------ -------------------- ---------- ----------                                                                                                                    
+       101 AJAY                           CSE                          20         85                                                                                                                    
+       103 ABHI                           CSE                          20         92                                                                                                                    
+
+SQL> SELECT STUDENT_NAME, MARKS
+  2  FROM STUDENT1
+  3  WHERE MARKS > 80;
+
+STUDENT_NAME                        MARKS                                                                                                                                                               
+------------------------------ ----------                                                                                                                                                               
+AJAY                                   85                                                                                                                                                               
+ABHI                                   92                                                                                                                                                               
+KARTHIK                                88                                                                                                                                                               
+
+SQL> CREATE TABLE EMPLOYEE1
+  2  (
+  3  
+SQL> CREATE TABLE EMPLOYEE1
+  2  (
+  3  EMP_ID NUMBER(5) PRIMARY KEY,
+  4   EMP_NAME VARCHAR2(30),
+  5   DEPARTMENT VARCHAR2(20),
+  6   SALARY NUMBER(8),
+  7   CITY VARCHAR2(20)
+  8  );
+
+Table created.
+
+SQL> INSERT INTO EMPLOYEE1 VALUES (101,'AJAY','CSE',35000,'CHENNAI'),
+  2  INSERT INTO EMPLOYEE1 VALUES (102,'ABHI','ECE',32000,'VELLORE'),
+  3  INSERT INTO EMPLOYEE1 VALUES (103,'VISHAL','IT',40000,'KANCHIPURAM'),
+  4  INSERT INTO EMPLOYEE1 VALUES (104,'KARTHIK','CSE',38000,'CHENNAI');
+INSERT INTO EMPLOYEE1 VALUES (101,'AJAY','CSE',35000,'CHENNAI'),
+                                                               *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> INSERT INTO EMPLOYEE1 VALUES (101,'AJAY','CSE',35000,'CHENNAI');
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE1 VALUES (102,'ABHI','ECE',32000,'VELLORE');
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE1 VALUES (103,'VISHAL','IT',40000,'KANCHIPURAM');
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE1 VALUES (104,'KARTHIK','CSE',38000,'CHENNAI');
+
+1 row created.
+
+SQL> SELECT *FROM EMPLOYEE1;
+
+    EMP_ID EMP_NAME                       DEPARTMENT               SALARY CITY                                                                                                                          
+---------- ------------------------------ -------------------- ---------- --------------------                                                                                                          
+       101 AJAY                           CSE                       35000 CHENNAI                                                                                                                       
+       102 ABHI                           ECE                       32000 VELLORE                                                                                                                       
+       103 VISHAL                         IT                        40000 KANCHIPURAM                                                                                                                   
+       104 KARTHIK                        CSE                       38000 CHENNAI                                                                                                                       
+
+SQL> UPDATE EMPLOYEE
+  2  
+SQL> 
+SQL> UPDATE EMPLOYEE1
+  2  SET SALARY =35000
+  3  WHERE EMP_ID =102;
+
+1 row updated.
+
+SQL> SELECT FROM EMPLOYEE1
+  2  WHERE EMP_ID =102;
+SELECT FROM EMPLOYEE1
+       *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> SELECT * FROM EMPLOYEE1
+  2  WHERE EMP_ID =102;
+
+    EMP_ID EMP_NAME                       DEPARTMENT               SALARY CITY                                                                                                                          
+---------- ------------------------------ -------------------- ---------- --------------------                                                                                                          
+       102 ABHI                           ECE                       35000 VELLORE                                                                                                                       
+
+SQL> DELECT FROM EMPLOYEE1
+SP2-0734: unknown command beginning "DELECT FRO..." - rest of line ignored.
+SQL> DELETE FROM EMPLOYEE1
+  2  WHERE DEPARTMENT = 'IT';
+
+1 row deleted.
+
+SQL> SELECT * FROM EMPLOYEE1;
+
+    EMP_ID EMP_NAME                       DEPARTMENT               SALARY CITY                                                                                                                          
+---------- ------------------------------ -------------------- ---------- --------------------                                                                                                          
+       101 AJAY                           CSE                       35000 CHENNAI                                                                                                                       
+       102 ABHI                           ECE                       35000 VELLORE                                                                                                                       
+       104 KARTHIK                        CSE                       38000 CHENNAI                                                                                                                       
+
+SQL> ALTER TABLE EMPLOYEE1
+  2  ADD EMAIL VARCHAR2(40);
+
+Table altered.
+
+SQL> DESC EMPLOYEE1;
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ EMP_ID                                                                                                            NOT NULL NUMBER(5)
+ EMP_NAME                                                                                                                   VARCHAR2(30)
+ DEPARTMENT                                                                                                                 VARCHAR2(20)
+ SALARY                                                                                                                     NUMBER(8)
+ CITY                                                                                                                       VARCHAR2(20)
+ EMAIL                                                                                                                      VARCHAR2(40)
+
+SQL> ALTER TABLE EMPLOYEE1
+  2  MODIFY EMP_NAME VARCHAR2(50);
+
+Table altered.
+
+SQL> SELECT *
+  2  FROM EMPLOYEE1
+  3  WHERE DEPARTMENT = 'CSE';
+
+    EMP_ID EMP_NAME                                           DEPARTMENT               SALARY CITY                 EMAIL                                                                                
+---------- -------------------------------------------------- -------------------- ---------- -------------------- ----------------------------------------                                             
+       101 AJAY                                               CSE                       35000 CHENNAI                                                                                                   
+       104 KARTHIK                                            CSE                       38000 CHENNAI                                                                                                   
+
+SQL> SELECT EMP_NAME, SALARY
+  2  FROM EMPLOYEE1
+  3  WHERE SALARY > 35000;
+
+EMP_NAME                                               SALARY                                                                                                                                           
+-------------------------------------------------- ----------                                                                                                                                           
+KARTHIK                                                 38000                                                                                                                                           
+
+SQL> SELECT EMP_NAME, CITY
+  2  FROM EMPLOYEE1
+  3  WHERE CITY = 'CHENNAI';
+
+EMP_NAME                                           CITY                                                                                                                                                 
+-------------------------------------------------- --------------------                                                                                                                                 
+AJAY                                               CHENNAI                                                                                                                                              
+KARTHIK                                            CHENNAI                                                                                                                                              
+
+SQL> CREATE TABLE EMPLOYEE2
+  2  (
+  3  EMP_ID NUMBER(5) PRIMARY KEY,
+  4  EMP_NAME VARCHAR2(30),
+  5  SALARY NUMBER(8)
+  6  );
+
+Table created.
+
+SQL> INSERT INTO EMPLOYEE2 VALUES (101,'ARUN',35000);
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE2 VALUES (102,'BALA',40000);
+
+1 row created.
+
+SQL> GRANT SELECT
+  2  ON EMPLOYEE2
+  3  TO SCOTT;
+
+Grant succeeded.
+
+SQL> GRANT SELECT, INSERT, UPDATE
+  2  ON EMPLOYEE2
+  3  TO SCOTT;
+
+Grant succeeded.
+
+SQL> REVOKE INSERT
+  2  ON EMPLOYEE2
+  3  FROM SCOTT;
+
+Revoke succeeded.
+
+SQL> INSERT INTO EMPLOYEE2 VALUES (103,'DIVYA',45000);
+
+1 row created.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> INSERT INTO EMPLOYEE2 VALUES (104,'KAVI',42000);
+
+1 row created.
+
+SQL> SAVEPOINT SP1;
+
+Savepoint created.
+
+SQL> INSERT INTO EMPLOYEE2 VALUES (105,'RAVI',38000);
+
+1 row created.
+
+SQL> ROLLBACK TO SP1;
+
+Rollback complete.
+
+SQL> SELECT * FROM EMPLOYEE2;
+
+    EMP_ID EMP_NAME                           SALARY                                                                                                                                                    
+---------- ------------------------------ ----------                                                                                                                                                    
+       101 ARUN                                35000                                                                                                                                                    
+       102 BALA                                40000                                                                                                                                                    
+       103 DIVYA                               45000                                                                                                                                                    
+       104 KAVI                                42000                                                                                                                                                    
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> Spooloff;
+SP2-0042: unknown command "Spooloff" - rest of line ignored.
+SQL> Spool off;
