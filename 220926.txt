@@ -1,0 +1,235 @@
+SQL> CREATE TABLE STU
+  2  (
+  3      STU_ID NUMBER(5) PRIMARY KEY,
+  4      STU_NAME VARCHAR2(30),
+  5      DEPARTMENT VARCHAR2(20),
+  6      MARKS NUMBER(3)
+  7  );
+CREATE TABLE STU
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> CREATE TABLE STUDENTS
+  2  (
+  3      STU_ID NUMBER(5) PRIMARY KEY,
+  4      STU_NAME VARCHAR2(30),
+  5      DEPARTMENT VARCHAR2(20),
+  6      MARKS NUMBER(3)
+  7  
+SQL> 
+SQL>  CREATE TABLE STUDENTS
+  2    2  (
+  3    3      STUDENTS_ID NUMBER(5) PRIMARY KEY,
+  4    4      STUDENTS_NAME VARCHAR2(30),
+  5    5      DEPARTMENT VARCHAR2(20),
+  6    6      MARKS NUMBER(3)
+  7    7  );
+  2  (
+  *
+ERROR at line 2:
+ORA-00922: missing or invalid option 
+
+
+SQL> CREATE TABLE STUDENTS
+  2     (
+  3  STUDENTS_ID NUMBER(5) PRIMARY KEY,
+  4  STUDENTS_NAME VARCHAR2(30),
+  5  DEPARTMENT VARCHAR2(20),
+  6  MARKS NUMBER(3)
+  7   );
+
+Table created.
+
+SQL> INSERT INTO STUDENTS VALUES (101,'Rahul','CSE',85);
+
+1 row created.
+
+SQL> INSERT INTO STUDENTS VALUES (102,'Abhi','ECE',78);
+
+1 row created.
+
+SQL> INSERT INTO STUDENTS VALUES (103,'Aunshka','IT',92);
+
+1 row created.
+
+SQL> INSERT INTO STUDENTS VALUES (104,'Ruthika','CSE',88);
+
+1 row created.
+
+SQL> CREATE TABLE ALUMNI
+  2  (
+  3      STUDENTS_NAME VARCHAR2(30)
+  4  );
+
+Table created.
+
+SQL> INSERT INTO ALUMNI VALUES ('ARUN');
+
+1 row created.
+
+SQL> INSERT INTO ALUMNI VALUES ('RAVI');
+
+1 row created.
+
+SQL> INSERT INTO ALUMNI VALUES ('KAVI');
+
+1 row created.
+
+SQL> SELECT *
+  2  FROM STUDENTS
+  3  WHERE DEPARTMENT IN ('CSE','IT');
+
+STUDENTS_ID STUDENTS_NAME                  DEPARTMENT                MARKS                                                                                                                              
+----------- ------------------------------ -------------------- ----------                                                                                                                              
+        101 Rahul                          CSE                          85                                                                                                                              
+        103 Aunshka                        IT                           92                                                                                                                              
+        104 Ruthika                        CSE                          88                                                                                                                              
+
+SQL> SELECT *
+  2  FROM STUDENTS
+  3  WHERE MARKS > ANY
+  4  (
+  5      SELECT MARKS
+  6      FROM STUDENTS
+  7      WHERE DEPARTMENT = 'ECE'
+  8  );
+
+STUDENTS_ID STUDENTS_NAME                  DEPARTMENT                MARKS                                                                                                                              
+----------- ------------------------------ -------------------- ----------                                                                                                                              
+        103 Aunshka                        IT                           92                                                                                                                              
+        104 Ruthika                        CSE                          88                                                                                                                              
+        101 Rahul                          CSE                          85                                                                                                                              
+
+SQL> SELECT *
+  2  FROM STUDENTS
+  3  WHERE MARKS > ALL
+  4  (
+  5      SELECT MARKS
+  6      FROM STUDENTS
+  7      WHERE DEPARTMENT = 'ECE'
+  8  );
+
+STUDENTS_ID STUDENTS_NAME                  DEPARTMENT                MARKS                                                                                                                              
+----------- ------------------------------ -------------------- ----------                                                                                                                              
+        101 Rahul                          CSE                          85                                                                                                                              
+        104 Ruthika                        CSE                          88                                                                                                                              
+        103 Aunshka                        IT                           92                                                                                                                              
+
+SQL> SELECT STUDENTS_NAME
+  2  FROM STUDENTS S
+  3  WHERE EXISTS
+  4  (
+  5      SELECT *
+  6      FROM ALUMNI A
+  7      WHERE A.STUDENTS_NAME = S.STUDENTS_NAME
+  8  );
+
+no rows selected
+
+SQL> INSERT INTO ALUMNI VALUES ('Rahul');
+
+1 row created.
+
+SQL> INSERT INTO ALUMNI VALUES ('Ruthika');
+
+1 row created.
+
+SQL> INSERT INTO ALUMNI VALUES ('Aunshka');
+
+1 row created.
+
+SQL> 
+
+SQL>  SELECT STUDENTS_NAME
+  2    2  FROM STUDENTS S
+  3    3  WHERE EXISTS
+  4    4  (
+  5    5      SELECT *
+  6    6      FROM ALUMNI A
+  7    7      WHERE A.STUDENTS_NAME = S.STUDENTS_NAME
+  8    8  );
+  2  FROM STUDENTS S
+  *
+ERROR at line 2:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> SELECT STUDENTS_NAME
+  2  FROM STUDENTS S
+  3   WHERE EXISTS
+  4  (
+  5  SELECT *
+  6  FROM ALUMNI A
+  7  WHERE A.STUDENTS_NAME = S.STUDENTS_NAME
+  8  );
+
+STUDENTS_NAME
+------------------------------
+Rahul
+Ruthika
+Aunshka
+
+SQL> SELECT STUDENTS_NAME
+  2  FROM STUDENTS S
+  3  WHERE NOT EXISTS
+  4  (
+  5      SELECT *
+  6      FROM ALUMNI A
+  7      WHERE A.STUDENTS_NAME = S.STUDENTS_NAME
+  8  );
+
+STUDENTS_NAME
+------------------------------
+Abhi
+
+SQL> SELECT STUDENTS_NAME FROM STUDENTS
+  2  UNION
+  3  SELECT STUDENTS_NAME FROM ALUMNI;
+
+STUDENTS_NAME
+------------------------------
+ARUN
+Abhi
+Aunshka
+KAVI
+RAVI
+Rahul
+Ruthika
+
+7 rows selected.
+
+SQL> SELECT STUDENTS_NAME FROM STUDENTS
+  2  INTERSECT
+  3  SELECT STUDENTS_NAME FROM ALUMNI;
+
+STUDENTS_NAME
+------------------------------
+Aunshka
+Rahul
+Ruthika
+
+SQL> INSERT INTO STUDENTS VALUES (101,'SURESH','EEE',80);
+INSERT INTO STUDENTS VALUES (101,'SURESH','EEE',80)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (A009.SYS_C0033799) violated
+
+
+SQL>
+SQL> INSERT INTO STUDENTS VALUES (NULL,'MANOJ','CSE',75);
+INSERT INTO STUDENTS VALUES (NULL,'MANOJ','CSE',75)
+                             *
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("A009"."STUDENTS"."STUDENTS_ID")
+
+
+SQL> SELECT * FROM STUDENTS;
+
+STUDENTS_ID STUDENTS_NAME                  DEPARTMENT                MARKS
+----------- ------------------------------ -------------------- ----------
+        101 Rahul                          CSE                          85
+        102 Abhi                           ECE                          78
+        103 Aunshka                        IT                           92
+        104 Ruthika                        CSE                          88
