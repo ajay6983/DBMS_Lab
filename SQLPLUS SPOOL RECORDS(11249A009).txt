@@ -1,0 +1,1489 @@
+SQL*PLUS SPOOL RECORDS
+NAME: T V S AJAY
+REGISTER NO: 11249A009
+CLASS: BE – CSE (AIML) | III YEAR / S1
+
+SQL> CREATE TABLE STUDENT
+     (
+     STUDENT_ID NUMBER(5) PRIMARY KEY,
+     STUDENT_NAME VARCHAR2(30),
+     DEPARTMENT VARCHAR2(20),
+     AGE NUMBER(2),
+     );
+
+Table created.
+
+SQL> INSERT INTO STUDENT VALUES (101,'ARUN','CSE',20,85);
+SQL> INSERT INTO STUDENT VALUES (102,'BALA','ECE',21,78);
+SQL> INSERT INTO STUDENT VALUES (103,'KAVI','CSE',20,92);
+SQL> INSERT INTO STUDENT VALUES (104,'DIVYA','IT',21,88);
+
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+
+SQL> SELECT * FROM STUDENT;
+
+STUDENT_ID    STUDENT_NAME    DEPARTMENT   AGE   MARKS
+----------    ------------    ----------   ---   -----
+101           ARUN            CSE          20    85
+102           BALA            ECE          21    78
+103           KAVI            CSE          20    92
+104           DIVYA           IT           21    88
+
+SQL> SELECT STUDENT_NAME, MARKS
+     FROM STUDENT;
+
+STUDENT_NAME      MARKS
+-------------     -----
+ARUN               85
+BALA               78
+KAVI               92
+DIVYA              88
+
+SQL> SELECT *
+     FROM STUDENT
+     WHERE DEPARTMENT = 'CSE';
+
+STUDENT_ID    STUDENT_NAME    DEPARTMENT   AGE   MARKS
+----------    ------------    ----------   ---   -----
+101           ARUN            CSE          20    85
+103           KAVI            CSE          20    92
+
+SQL> SELECT STUDENT_NAME, MARKS
+     FROM STUDENT
+     WHERE MARKS > 80;
+
+STUDENT_NAME      MARKS
+-------------     -----
+ARUN               85
+KAVI               92
+DIVYA              88
+
+SQL> CREATE TABLE EMPLOYEE
+     (
+
+     EMP_ID NUMBER(5) PRIMARY KEY,
+     EMP_NAME VARCHAR2(30),
+     DEPARTMENT VARCHAR2(20),
+     SALARY NUMBER(8),
+     CITY VARCHAR2(20)
+     );
+
+Table created.
+
+SQL> INSERT INTO EMPLOYEE VALUES (101,'ARUN','CSE',35000,'CHENNAI');
+SQL> INSERT INTO EMPLOYEE VALUES (102,'BALA','ECE',32000,'VELLORE');
+SQL> INSERT INTO EMPLOYEE VALUES (103,'DIVYA','IT',40000,'KANCHIPURAM');
+SQL> INSERT INTO EMPLOYEE VALUES (104,'KAVI','CSE',38000,'CHENNAI');
+
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+
+SQL> SELECT * FROM EMPLOYEE;
+
+EMP_ID     EMP_NAME    DEPARTMENT    SALARY    CITY
+------     --------    ----------    ------    -----------
+101        ARUN        CSE            35000    CHENNAI
+102        BALA        ECE            32000    VELLORE
+103        DIVYA       IT             40000    KANCHIPURAM
+104        KAVI        CSE            38000    CHENNAI
+
+SQL> UPDATE EMPLOYEE
+SQL> SET SALARY = 35000
+     WHERE EMP_ID = 102;
+
+1 row updated.
+
+SQL> SELECT * FROM EMPLOYEE
+     WHERE EMP_ID = 102;
+
+EMP_ID     EMP_NAME    DEPARTMENT    SALARY    CITY
+------     --------    ----------    ------    --------
+102        BALA        ECE            35000    VELLORE
+
+SQL> DELETE FROM EMPLOYEE
+     WHERE DEPARTMENT = 'IT';
+
+1 row deleted.
+
+SQL> SELECT * FROM EMPLOYEE;
+
+EMP_ID     EMP_NAME    DEPARTMENT    SALARY    CITY
+------     --------    ----------    ------    --------
+101        ARUN        CSE            35000    CHENNAI
+102        BALA        ECE            35000    VELLORE
+104        KAVI        CSE            38000    CHENNAI
+
+Add a new column:
+
+SQL> ALTER TABLE EMPLOYEE
+     ADD EMAIL VARCHAR2(40);
+
+SQL> DESC EMPLOYEE;
+
+Name          Null?     Type
+------------- --------- ----------------
+EMP_ID        NOT NULL NUMBER(5)
+EMP_NAME                VARCHAR2(30)
+DEPARTMENT              VARCHAR2(20)
+
+SALARY                        NUMBER(8)
+CITY                          VARCHAR2(20)
+EMAIL                         VARCHAR2(40)
+
+SQL> ALTER TABLE EMPLOYEE
+     MODIFY EMP_NAME VARCHAR2(50);
+
+SQL> SELECT *
+     FROM EMPLOYEE
+     WHERE DEPARTMENT = 'CSE';
+
+EMP_ID    EMP_NAME      DEPARTMENT    SALARY    CITY
+------    --------      ----------    ------    --------
+101       ARUN          CSE            35000    CHENNAI
+104       KAVI          CSE            38000    CHENNAI
+
+SQL> SELECT EMP_NAME, SALARY
+     FROM EMPLOYEE
+     WHERE SALARY > 35000;
+
+EMP_NAME      SALARY
+---------     -------
+DIVYA          40000
+KAVI           38000
+
+SQL> SELECT EMP_NAME, CITY
+     FROM EMPLOYEE
+     WHERE CITY = 'CHENNAI';
+
+EMP_NAME      CITY
+---------     --------
+ARUN          CHENNAI
+KAVI          CHENNAI
+
+SQL> CREATE TABLE EMPLOYEE
+     (
+     EMP_ID NUMBER(5) PRIMARY KEY,
+     EMP_NAME VARCHAR2(30),
+     SALARY NUMBER(8)
+     );
+
+Table created.
+
+SQL> INSERT INTO EMPLOYEE VALUES (101,'ARUN',35000);
+SQL> INSERT INTO EMPLOYEE VALUES (102,'BALA',40000);
+
+1 row created.
+1 row created.
+
+SQL> GRANT SELECT
+     ON EMPLOYEE
+     TO SCOTT;
+
+SQL> Grant succeeded.
+
+SQL> GRANT SELECT, INSERT, UPDATE
+     ON EMPLOYEE
+     TO SCOTT;
+
+SQL> Grant succeeded.
+
+SQL> REVOKE INSERT
+     ON EMPLOYEE
+     FROM SCOTT;
+
+SQL> Revoke succeeded.
+
+SQL> INSERT INTO EMPLOYEE VALUES (103,'DIVYA',45000);
+
+1 row created.
+
+SQL> COMMIT;
+
+SQL> Commit complete.
+
+SQL> INSERT INTO EMPLOYEE VALUES (104,'KAVI',42000);
+
+1 row created.
+
+SQL> SAVEPOINT SP1;
+
+SQL> Savepoint created.
+
+SQL> INSERT INTO EMPLOYEE VALUES (105,'RAVI',38000);
+
+1 row created.
+
+SQL> ROLLBACK TO SP1;
+
+SQL> Rollback complete.
+
+SQL> SELECT * FROM EMPLOYEE;
+
+EMP_ID     EMP_NAME     SALARY
+------     --------     -------
+101        ARUN          35000
+102        BALA          40000
+103        DIVYA         45000
+104        KAVI          42000
+
+SQL> COMMIT;
+
+SQL> Commit complete.
+
+     Command                 Purpose
+
+SQL> GRANT                   Gives privileges to users
+
+SQL> REVOKE                  Removes privileges from users
+SQL> COMMIT                  Saves all changes permanently
+
+SQL> SAVEPOINT               Creates a rollback point within a transaction
+SQL> ROLLBACK                Undoes changes made since a given point
+
+     ──────────────────────────────────────────────────────────────────────────────
+
+SQL> CREATE TABLE DEPARTMENT
+     (
+     DEPT_ID NUMBER(3),
+     DEPT_NAME VARCHAR2(30),
+
+     CONSTRAINT PK_DEPT
+
+     );
+
+Table created.
+
+SQL> CREATE TABLE EMPLOYEE
+     (
+     EMP_ID NUMBER(5),
+     EMP_NAME VARCHAR2(30) CONSTRAINT NN_EMPNAME NOT NULL,
+     EMAIL VARCHAR2(50),
+     SALARY NUMBER(8),
+     DEPT_ID NUMBER(3),
+
+     CONSTRAINT PK_EMP PRIMARY KEY (EMP_ID),
+     CONSTRAINT UK_EMAIL UNIQUE (EMAIL),
+     CONSTRAINT CK_SALARY CHECK (SALARY >= 10000),
+     CONSTRAINT FK_DEPT FOREIGN KEY (DEPT_ID)
+     REFERENCES DEPARTMENT(DEPT_ID)
+     );
+
+Table created.
+
+SQL> INSERT INTO DEPARTMENT VALUES (101,'CSE');
+SQL> INSERT INTO DEPARTMENT VALUES (102,'ECE');
+
+1 row created.
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES (1001,'ARUN','arun@gmail.com',35000,101);
+SQL> INSERT INTO EMPLOYEE VALUES (1002,'BALA','bala@gmail.com',30000,102);
+
+1 row created.
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE
+     VALUES (1003,NULL,'divya@gmail.com',25000,101);
+
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("EMPLOYEE"."EMP_NAME")
+
+SQL> INSERT INTO EMPLOYEE
+     VALUES (1004,'KAVI','arun@gmail.com',28000,101);
+
+ERROR at line 1:
+ORA-00001: unique constraint (UK_EMAIL) violated
+
+SQL> INSERT INTO EMPLOYEE
+     VALUES (1005,'RAVI','ravi@gmail.com',8000,101);
+
+ERROR at line 1:
+ORA-02290: check constraint (CK_SALARY) violated
+
+SQL> INSERT INTO EMPLOYEE
+     VALUES (1006,'SURESH','suresh@gmail.com',25000,105);
+
+ERROR at line 1:
+ORA-02291: integrity constraint (FK_DEPT) violated
+
+SQL> INSERT INTO EMPLOYEE
+     VALUES (1001,'MANOJ','manoj@gmail.com',30000,101);
+
+ERROR at line 1:
+ORA-00001: unique constraint (PK_EMP) violated
+
+SQL> SELECT * FROM EMPLOYEE;
+
+EMP_ID   EMP_NAME      EMAIL               SALARY    DEPT_ID
+------   --------      -----------------   ------    -------
+1001     ARUN          arun@gmail.com       35000       101
+1002     BALA          bala@gmail.com       30000       102
+
+SQL> DESC DEPARTMENT;
+
+Name        Null?     Type
+----------- --------- ----------------
+DEPT_ID     NOT NULL NUMBER(3)
+DEPT_NAME             VARCHAR2(30)
+
+SQL> DESC EMPLOYEE;
+
+Name       Null?     Type
+---------- --------- ----------------
+EMP_ID     NOT NULL NUMBER(5)
+EMP_NAME   NOT NULL VARCHAR2(30)
+EMAIL                VARCHAR2(50)
+SALARY               NUMBER(8)
+DEPT_ID              NUMBER(3)
+
+──────────────────────────────────────────────────────────────────────────────
+
+SQL> CREATE TABLE STUDENT
+
+     (
+     STUDENT_ID NUMBER(5) PRIMARY KEY,
+     STUDENT_NAME VARCHAR2(30),
+     DEPARTMENT VARCHAR2(20),
+     );
+
+Table created.
+
+SQL> INSERT INTO STUDENT VALUES (101,'ARUN','CSE',85);
+SQL> INSERT INTO STUDENT VALUES (102,'BALA','ECE',78);
+SQL> INSERT INTO STUDENT VALUES (103,'DIVYA','IT',92);
+SQL> INSERT INTO STUDENT VALUES (104,'KAVI','CSE',88);
+
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+
+SQL> CREATE TABLE ALUMNI
+     (
+     STUDENT_NAME VARCHAR2(30)
+     );
+
+Table created.
+
+SQL> INSERT INTO ALUMNI VALUES ('ARUN');
+SQL> INSERT INTO ALUMNI VALUES ('RAVI');
+SQL> INSERT INTO ALUMNI VALUES ('KAVI');
+
+1 row created.
+1 row created.
+1 row created.
+
+SQL> SELECT *
+
+     FROM STUDENT
+     WHERE DEPARTMENT IN ('CSE','IT');
+
+STUDENT_ID    STUDENT_NAME   DEPARTMENT   MARKS
+----------    ------------   ----------   -----
+101           ARUN           CSE           85
+103           DIVYA          IT            92
+104           KAVI           CSE           88
+
+SQL> SELECT *
+     FROM STUDENT
+     WHERE MARKS > ANY
+     (
+SQL> SELECT MARKS
+     FROM STUDENT
+     WHERE DEPARTMENT = 'ECE'
+     );
+
+STUDENT_ID    STUDENT_NAME   DEPARTMENT   MARKS
+----------    ------------   ----------   -----
+101           ARUN           CSE           85
+103           DIVYA          IT            92
+104           KAVI           CSE           88
+
+SQL> SELECT *
+     FROM STUDENT
+     WHERE MARKS > ALL
+     (
+SQL> SELECT MARKS
+     FROM STUDENT
+     WHERE DEPARTMENT = 'ECE'
+     );
+
+STUDENT_ID    STUDENT_NAME   DEPARTMENT   MARKS
+----------    ------------   ----------   -----
+101           ARUN           CSE           85
+103           DIVYA          IT            92
+104           KAVI           CSE           88
+
+SQL> SELECT STUDENT_NAME
+     FROM STUDENT S
+     WHERE EXISTS
+     (
+SQL> SELECT *
+     FROM ALUMNI A
+     WHERE A.STUDENT_NAME = S.STUDENT_NAME
+     );
+
+STUDENT_NAME
+------------
+ARUN
+KAVI
+
+SQL> SELECT STUDENT_NAME
+     FROM STUDENT S
+     WHERE NOT EXISTS
+     (
+SQL> SELECT *
+     FROM ALUMNI A
+     WHERE A.STUDENT_NAME = S.STUDENT_NAME
+     );
+
+STUDENT_NAME
+------------
+BALA
+DIVYA
+
+SQL> SELECT STUDENT_NAME FROM STUDENT
+     UNION
+SQL> SELECT STUDENT_NAME FROM ALUMNI;
+
+STUDENT_NAME
+------------
+ARUN
+BALA
+DIVYA
+KAVI
+RAVI
+
+SQL> SELECT STUDENT_NAME FROM STUDENT
+     INTERSECT
+SQL> SELECT STUDENT_NAME FROM ALUMNI;
+
+STUDENT_NAME
+------------
+ARUN
+KAVI
+
+SQL> INSERT INTO STUDENT VALUES (101,'SURESH','EEE',80);
+
+ERROR at line 1:
+ORA-00001: unique constraint violated
+
+SQL> INSERT INTO STUDENT VALUES (NULL,'MANOJ','CSE',75);
+
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("STUDENT"."STUDENT_ID")
+
+Display All Records
+
+SQL> SELECT * FROM STUDENT;
+
+STUDENT_ID     STUDENT_NAME       DEPARTMENT   MARKS
+----------     ------------       ----------   -----
+101            ARUN               CSE           85
+102            BALA               ECE           78
+103            DIVYA              IT            92
+104            KAVI               CSE           88
+
+──────────────────────────────────────────────────────────────────────────────
+
+SQL> CREATE TABLE STUDENT
+     (
+     STUDENT_ID NUMBER(5) PRIMARY KEY,
+     STUDENT_NAME VARCHAR2(30),
+     DEPARTMENT VARCHAR2(20),
+
+     );
+
+Table created.
+
+SQL> INSERT INTO STUDENT VALUES (101,'ARUN','CSE',85);
+SQL> INSERT INTO STUDENT VALUES (102,'BALA','ECE',78);
+SQL> INSERT INTO STUDENT VALUES (103,'DIVYA','IT',92);
+SQL> INSERT INTO STUDENT VALUES (104,'KAVI','CSE',88);
+SQL> INSERT INTO STUDENT VALUES (105,'RAVI','ECE',81);
+SQL> INSERT INTO STUDENT VALUES (106,'SURESH','IT',95);
+
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+
+SQL> SELECT COUNT(*) AS TOTAL_STUDENTS
+     FROM STUDENT;
+
+TOTAL_STUDENTS
+--------------
+
+SQL> SELECT SUM(MARKS) AS TOTAL_MARKS
+     FROM STUDENT;
+
+TOTAL_MARKS
+-----------
+
+SQL> SELECT AVG(MARKS) AS AVERAGE_MARKS
+     FROM STUDENT;
+
+AVERAGE_MARKS
+-------------
+
+SQL> SELECT MAX(MARKS) AS HIGHEST_MARK
+     FROM STUDENT;
+
+HIGHEST_MARK
+------------
+
+SQL> SELECT MIN(MARKS) AS LOWEST_MARK
+     FROM STUDENT;
+
+LOWEST_MARK
+-----------
+
+SQL> SELECT DEPARTMENT, AVG(MARKS) AS AVG_MARKS
+     FROM STUDENT
+     GROUP BY DEPARTMENT;
+
+DEPARTMENT     AVG_MARKS
+----------     ----------
+CSE                 86.5
+ECE                 79.5
+IT                  93.5
+
+Count students in each department:
+
+SQL> SELECT DEPARTMENT, COUNT(*) AS TOTAL_STUDENTS
+     FROM STUDENT
+     GROUP BY DEPARTMENT;
+
+DEPARTMENT     TOTAL_STUDENTS
+----------     --------------
+CSE                         2
+
+ECE                           2
+IT                            2
+
+SQL> SELECT DEPARTMENT, MAX(MARKS) AS MAX_MARKS
+     FROM STUDENT
+     GROUP BY DEPARTMENT;
+
+DEPARTMENT    MAX_MARKS
+----------    ----------
+CSE                 88
+ECE                 81
+IT                  95
+
+SQL> SELECT DEPARTMENT, AVG(MARKS) AS AVG_MARKS
+     FROM STUDENT
+     GROUP BY DEPARTMENT
+     HAVING AVG(MARKS) > 85;
+
+DEPARTMENT    AVG_MARKS
+----------    ----------
+CSE                86.5
+IT                 93.5
+
+SQL> SELECT DEPARTMENT, COUNT(*) AS TOTAL_STUDENTS
+     FROM STUDENT
+     GROUP BY DEPARTMENT
+     HAVING COUNT(*) > 1;
+
+DEPARTMENT    TOTAL_STUDENTS
+----------    --------------
+CSE                        2
+ECE                        2
+IT                         2
+
+SQL> SELECT DEPARTMENT, COUNT(*) AS NO_OF_STUDENTS,
+     AVG(MARKS) AS AVG_MARKS, MAX(MARKS) AS HIGHEST_MARK
+     FROM STUDENT
+     GROUP BY DEPARTMENT
+
+     HAVING AVG(MARKS) > 80;
+
+DEPARTMENT    NO_OF_STUDENTS   AVG_MARKS    HIGHEST_MARK
+----------    --------------   ---------    -------------
+CSE                        2        86.5              88
+IT                         2        93.5              95
+
+SQL> SELECT * FROM STUDENT;
+
+STUDENT_ID    STUDENT_NAME   DEPARTMENT    MARKS
+----------    ------------   ----------    -----
+101           ARUN           CSE            85
+102           BALA           ECE            78
+103           DIVYA          IT             92
+104           KAVI           CSE            88
+105           RAVI           ECE            81
+106           SURESH         IT             95
+
+──────────────────────────────────────────────────────────────────────────────
+
+SQL> CREATE TABLE STUDENT
+     (
+     STUDENT_ID NUMBER(5) PRIMARY KEY,
+     STUDENT_NAME VARCHAR2(30),
+     DEPARTMENT VARCHAR2(20),
+     );
+
+Table created.
+
+SQL> INSERT INTO STUDENT VALUES (101,'ARUN','CSE',85);
+SQL> INSERT INTO STUDENT VALUES (102,'BALA','ECE',78);
+SQL> INSERT INTO STUDENT VALUES (103,'DIVYA','IT',92);
+SQL> INSERT INTO STUDENT VALUES (104,'KAVI','CSE',88);
+
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+
+SQL> CREATE VIEW CSE_STUDENTS AS
+SQL> SELECT STUDENT_ID, STUDENT_NAME, MARKS
+     FROM STUDENT
+     WHERE DEPARTMENT = 'CSE';
+
+View created.
+
+SQL> SELECT * FROM CSE_STUDENTS;
+
+STUDENT_ID    STUDENT_NAME   MARKS
+----------    ------------   -----
+101           ARUN            85
+104           KAVI            88
+
+SQL> CREATE SEQUENCE STUD_SEQ
+     START WITH 105
+     INCREMENT BY 1
+     MINVALUE 105
+     MAXVALUE 999
+     NOCYCLE
+     NOCACHE;
+
+Sequence created.
+
+SQL> SELECT STUD_SEQ.NEXTVAL FROM DUAL;
+
+NEXTVAL
+-------
+
+Executed again:
+
+SQL> SELECT STUD_SEQ.NEXTVAL FROM DUAL;
+
+NEXTVAL
+-------
+
+SQL> INSERT INTO STUDENT
+     VALUES (STUD_SEQ.NEXTVAL,'RAVI','ECE',81);
+
+1 row created.
+
+SQL> SELECT * FROM STUDENT;
+
+STUDENT_ID         STUDENT_NAME   DEPARTMENT   MARKS
+----------         ------------   ----------   -----
+101                ARUN           CSE           85
+102                BALA           ECE           78
+103                DIVYA          IT            92
+104                KAVI           CSE           88
+107                RAVI           ECE           81
+
+SQL> CREATE INDEX IDX_STUDENT_NAME
+     ON STUDENT(STUDENT_NAME);
+
+Index created.
+
+SQL> SELECT INDEX_NAME, TABLE_NAME
+     FROM USER_INDEXES
+     WHERE TABLE_NAME = 'STUDENT';
+
+INDEX_NAME               TABLE_NAME
+------------------       ----------
+IDX_STUDENT_NAME         STUDENT
+SYS_C001234              STUDENT
+
+SQL> INSERT INTO STUDENT VALUES (108,'SURESH','IT',90);
+
+1 row created.
+
+SQL> SAVEPOINT SP1;
+
+SQL> Savepoint created.
+
+SQL> INSERT INTO STUDENT VALUES (109,'MANOJ','CSE',87);
+
+1 row created.
+
+SQL> ROLLBACK TO SP1;
+
+SQL> Rollback complete.
+
+SQL> SELECT * FROM STUDENT;
+
+STUDENT_ID     STUDENT_NAME     DEPARTMENT      MARKS
+----------     ------------     ----------      -----
+101            ARUN             CSE              85
+102            BALA             ECE              78
+103            DIVYA            IT               92
+104            KAVI             CSE              88
+107            RAVI             ECE              81
+108            SURESH           IT               90
+
+SQL> COMMIT;
+
+SQL> Commit complete.
+
+     ──────────────────────────────────────────────────────────────────────────────
+     Consider the following STUDENT_COURSE data, which contains repeating groups, data redundancy, and
+
+     Student_ID              Student_Name     Course1              Course2              Course3
+
+     101                     ARUN             DBMS                 JAVA                 C
+
+     102                     BALA             DBMS                 C++                  NULL
+
+     103                     DIVYA            JAVA                 PYTHON               DBMS
+
+     Student_ID                         Student_Name                     Course
+
+     101                                ARUN                             DBMS
+
+     101                                ARUN                             JAVA
+
+     101                                ARUN                             C
+     102                                BALA                             DBMS
+
+     102                                BALA                             C++
+     103                                DIVYA                            JAVA
+
+     103                                DIVYA                            PYTHON
+     103                                DIVYA                            DBMS
+     Functional dependency: (Student_ID, Course) → Student_Name
+
+SQL> CREATE TABLE STUDENT_COURSE_1NF
+     (
+     STUDENT_ID NUMBER(5),
+     STUDENT_NAME VARCHAR2(30),
+     COURSE VARCHAR2(20)
+     );
+
+Table created.
+
+SQL> CREATE TABLE STUDENT
+     (
+     STUDENT_ID NUMBER(5) PRIMARY KEY,
+     STUDENT_NAME VARCHAR2(30)
+     );
+
+Table created.
+
+SQL> CREATE TABLE STUDENT_COURSE
+     (
+     STUDENT_ID NUMBER(5),
+     COURSE VARCHAR2(20),
+     REFERENCES STUDENT(STUDENT_ID)
+     );
+
+Table created.
+
+SQL> CREATE TABLE DEPARTMENT
+
+     Dept_ID                                           Dept_Name
+
+     (
+     DEPT_ID VARCHAR2(5) PRIMARY KEY,
+     DEPT_NAME VARCHAR2(30)
+     );
+
+Table created.
+
+SQL> CREATE TABLE STUDENT
+     (
+     STUDENT_ID NUMBER(5) PRIMARY KEY,
+     STUDENT_NAME VARCHAR2(30),
+     DEPT_ID VARCHAR2(5),
+     REFERENCES DEPARTMENT(DEPT_ID)
+     );
+
+Table created.
+
+SQL> CREATE TABLE STUDENT_HOBBY
+     (
+
+     Student                                                    Hobby
+
+     STUDENT_NAME VARCHAR2(30),
+     HOBBY VARCHAR2(30)
+     );
+
+SQL> CREATE TABLE STUDENT_LANGUAGE
+     (
+     STUDENT_NAME VARCHAR2(30),
+     LANGUAGE VARCHAR2(30)
+     );
+
+Table created.
+
+Table created.
+
+SQL> CREATE TABLE SUPPLIER_PART
+     (
+
+     Supplier                                              Part
+
+     SUPPLIER_ID VARCHAR2(5),
+     PART_ID VARCHAR2(5)
+     );
+
+SQL> CREATE TABLE PART_PROJECT
+     (
+     PART_ID VARCHAR2(5),
+     PROJECT_ID VARCHAR2(5)
+     );
+
+SQL> CREATE TABLE SUPPLIER_PROJECT
+     (
+     SUPPLIER_ID VARCHAR2(5),
+     PROJECT_ID VARCHAR2(5)
+     );
+
+Table created.
+
+Table created.
+
+Table created.
+
+1NF                       Repeating groups
+
+2NF                       Partial dependency
+3NF                       Transitive dependency
+
+4NF                       Multivalued dependency
+
+5NF                       Join dependency
+
+SQL> CREATE TABLE DEPARTMENT
+     (
+     DEPT_ID NUMBER(3) PRIMARY KEY,
+     DEPT_NAME VARCHAR2(30)
+     );
+
+Table created.
+
+SQL> INSERT INTO DEPARTMENT VALUES (101,'CSE');
+SQL> INSERT INTO DEPARTMENT VALUES (102,'ECE');
+SQL> INSERT INTO DEPARTMENT VALUES (103,'IT');
+
+1 row created.
+1 row created.
+1 row created.
+
+SQL> CREATE TABLE STUDENT
+     (
+     STUDENT_ID NUMBER(5) PRIMARY KEY,
+     STUDENT_NAME VARCHAR2(30),
+     DEPT_ID NUMBER(3),
+
+     CONSTRAINT FK_DEPT FOREIGN KEY (DEPT_ID)
+     REFERENCES DEPARTMENT(DEPT_ID)
+     );
+
+Table created.
+
+SQL> INSERT INTO STUDENT VALUES (1001,'ARUN',85,101);
+SQL> INSERT INTO STUDENT VALUES (1002,'BALA',78,102);
+SQL> INSERT INTO STUDENT VALUES (1003,'DIVYA',92,103);
+SQL> INSERT INTO STUDENT VALUES (1004,'KAVI',88,101);
+
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+
+SQL> SELECT S.STUDENT_ID, S.STUDENT_NAME, D.DEPT_NAME
+     FROM STUDENT S
+
+     ON S.DEPT_ID = D.DEPT_ID;
+
+STUDENT_ID     STUDENT_NAME   DEPT_NAME
+----------     ------------   ----------
+1001           ARUN           CSE
+1002           BALA           ECE
+1003           DIVYA          IT
+1004           KAVI           CSE
+
+SQL> SELECT S.STUDENT_NAME, D.DEPT_NAME
+     FROM STUDENT S
+     ON S.DEPT_ID = D.DEPT_ID;
+
+STUDENT_NAME     DEPT_NAME
+------------     ----------
+ARUN             CSE
+BALA             ECE
+DIVYA            IT
+KAVI             CSE
+
+SQL> SELECT S.STUDENT_NAME, D.DEPT_NAME
+     FROM STUDENT S
+     ON S.DEPT_ID = D.DEPT_ID;
+
+STUDENT_NAME     DEPT_NAME
+------------     ----------
+ARUN             CSE
+KAVI             CSE
+BALA             ECE
+DIVYA            IT
+
+SQL> SELECT S.STUDENT_NAME, D.DEPT_NAME
+     FROM STUDENT S
+     ON S.DEPT_ID = D.DEPT_ID;
+
+STUDENT_NAME       DEPT_NAME
+------------       ----------
+ARUN               CSE
+KAVI               CSE
+BALA               ECE
+DIVYA              IT
+
+SQL> CREATE TABLE EMPLOYEE
+     (
+     EMP_ID NUMBER(5) PRIMARY KEY,
+     EMP_NAME VARCHAR2(30),
+     MANAGER_ID NUMBER(5)
+     );
+
+SQL> INSERT INTO EMPLOYEE VALUES (1,'RAJ',NULL);
+SQL> INSERT INTO EMPLOYEE VALUES (2,'ARUN',1);
+SQL> INSERT INTO EMPLOYEE VALUES (3,'BALA',1);
+
+SQL> SELECT E.EMP_NAME EMPLOYEE, M.EMP_NAME MANAGER
+     FROM EMPLOYEE E
+     LEFT JOIN EMPLOYEE M
+     ON E.MANAGER_ID = M.EMP_ID;
+
+EMPLOYEE         MANAGER
+----------       ----------
+RAJ
+ARUN             RAJ
+BALA             RAJ
+
+SQL> SELECT STUDENT_NAME, MARKS
+     FROM STUDENT
+     WHERE MARKS >
+     (
+SQL> SELECT AVG(MARKS)
+     FROM STUDENT
+     );
+
+STUDENT_NAME       MARKS
+------------       -----
+DIVYA               92
+KAVI                88
+
+SQL> SELECT STUDENT_NAME
+     FROM STUDENT
+     WHERE DEPT_ID IN
+     (
+SQL> SELECT DEPT_ID
+     FROM DEPARTMENT
+     WHERE DEPT_NAME = 'CSE'
+     );
+
+STUDENT_NAME
+------------
+ARUN
+KAVI
+
+SQL> SELECT STUDENT_NAME, MARKS, DEPT_ID
+     FROM STUDENT S1
+     WHERE MARKS =
+     (
+SQL> SELECT MAX(MARKS)
+     FROM STUDENT S2
+     WHERE S1.DEPT_ID = S2.DEPT_ID
+     );
+
+STUDENT_NAME     MARKS   DEPT_ID
+------------     -----   -------
+KAVI               88      101
+BALA               78      102
+DIVYA              92      103
+
+SQL> SET SERVEROUTPUT ON;
+
+SQL> DECLARE
+     N NUMBER;
+SQL> BEGIN
+     N := &N;
+
+IF N > 0 THEN
+
+old      5: N := &N;
+new      5: N := 25;
+
+The number is Positive
+
+PL/SQL procedure successfully completed.
+
+old      5: N := &N;
+new      5: N := -15;
+
+The number is Negative
+
+PL/SQL procedure successfully completed.
+
+old      5: N := &N;
+new      5: N := 0;
+
+The number is Zero
+
+PL/SQL procedure successfully completed.
+
+SQL> SET SERVEROUTPUT ON;
+
+SQL> DECLARE
+     A NUMBER := 100;
+B NUMBER := 0;
+C NUMBER;
+SQL> BEGIN
+     C := A / B;
+
+Error: Division by Zero is not allowed.
+
+PL/SQL procedure successfully completed.
+
+SQL> Create a sample table:
+
+SQL> CREATE TABLE STUDENT
+     (
+     STUDENT_ID NUMBER PRIMARY KEY,
+     STUDENT_NAME VARCHAR2(30)
+     );
+
+SQL> INSERT INTO STUDENT VALUES (101,'ARUN');
+SQL> COMMIT;
+
+SQL> SET SERVEROUTPUT ON;
+
+SQL> DECLARE
+     V_NAME STUDENT.STUDENT_NAME%TYPE;
+SQL> BEGIN
+SQL> SELECT STUDENT_NAME
+     INTO V_NAME
+     FROM STUDENT
+     WHERE STUDENT_ID = 999;
+
+DBMS_OUTPUT.PUT_LINE(V_NAME);
+EXCEPTION
+WHEN NO_DATA_FOUND THEN
+
+Error: No matching record found.
+
+PL/SQL procedure successfully completed.
+
+SQL> SET SERVEROUTPUT ON;
+
+SQL> DECLARE
+     V_NAME STUDENT.STUDENT_NAME%TYPE;
+SQL> BEGIN
+SQL> SELECT STUDENT_NAME
+     INTO V_NAME
+     FROM STUDENT;
+
+DBMS_OUTPUT.PUT_LINE(V_NAME);
+EXCEPTION
+WHEN TOO_MANY_ROWS THEN
+
+Error: Query returned multiple rows.
+
+PL/SQL procedure successfully completed.
+
+SQL> SET SERVEROUTPUT ON;
+
+SQL> BEGIN
+SQL> INSERT INTO STUDENT VALUES (101,'BALA');
+EXCEPTION
+WHEN DUP_VAL_ON_INDEX THEN
+DBMS_OUTPUT.PUT_LINE('Error: Duplicate value violates unique constraint.');
+END;
+
+Error: Duplicate value violates unique constraint.
+
+PL/SQL procedure successfully completed.
+
+SQL> SET SERVEROUTPUT ON;
+
+SQL> DECLARE
+     V_NUM NUMBER(2);
+SQL> BEGIN
+     V_NUM := 12345;
+EXCEPTION
+WHEN VALUE_ERROR THEN
+
+Error: Value exceeds variable size.
+
+PL/SQL procedure successfully completed.
+
+SQL> SET SERVEROUTPUT ON;
+
+SQL> DECLARE
+     V_NUM NUMBER;
+SQL> BEGIN
+     V_NUM := 10/0;
+EXCEPTION
+WHEN OTHERS THEN
+DBMS_OUTPUT.PUT_LINE('SQLCODE : ' || SQLCODE);
+DBMS_OUTPUT.PUT_LINE('SQLERRM : ' || SQLERRM);
+END;
+
+SQLCODE : -1476
+SQLERRM : ORA-01476: divisor is equal to zero
+
+PL/SQL procedure successfully completed.
+
+SQL> CREATE TABLE STUDENT
+     (
+     STUDENT_ID NUMBER(5) PRIMARY KEY,
+     STUDENT_NAME VARCHAR2(30),
+     );
+
+Table created.
+
+SQL> INSERT INTO STUDENT VALUES (101,'ARUN',85);
+SQL> INSERT INTO STUDENT VALUES (102,'BALA',72);
+SQL> INSERT INTO STUDENT VALUES (103,'DIVYA',91);
+SQL> COMMIT;
+
+1 row created.
+1 row created.
+1 row created.
+SQL> Commit complete.
+
+SQL> CREATE OR REPLACE PROCEDURE GET_STUDENT
+     (
+     P_ID IN NUMBER
+     )
+     IS
+     V_NAME STUDENT.STUDENT_NAME%TYPE;
+V_MARKS STUDENT.MARKS%TYPE;
+SQL> BEGIN
+SQL> SELECT STUDENT_NAME, MARKS
+     INTO V_NAME, V_MARKS
+     FROM STUDENT
+     WHERE STUDENT_ID = P_ID;
+
+Procedure created.
+
+SQL> SET SERVEROUTPUT ON;
+
+SQL> EXEC GET_STUDENT(101);
+
+Student Name : ARUN
+
+PL/SQL procedure successfully completed.
+
+SQL> EXEC GET_STUDENT(110);
+
+Student Record Not Found.
+PL/SQL procedure successfully completed.
+
+90 and above                                        O
+80–89                                               A+
+
+70–79                                               A
+60–69                                               B
+
+Below 60                                            C
+
+SQL> CREATE OR REPLACE FUNCTION FIND_GRADE
+     (
+     P_MARKS NUMBER
+     )
+     RETURN VARCHAR2
+     IS
+     V_GRADE VARCHAR2(2);
+SQL> BEGIN
+     IF P_MARKS >= 90 THEN
+     V_GRADE := 'O';
+ELSIF P_MARKS >= 80 THEN
+V_GRADE := 'A+';
+ELSIF P_MARKS >= 70 THEN
+V_GRADE := 'A';
+ELSIF P_MARKS >= 60 THEN
+V_GRADE := 'B';
+ELSE
+V_GRADE := 'C';
+END IF;
+
+RETURN V_GRADE;
+END;
+
+Function created.
+
+SQL> SELECT FIND_GRADE(91) AS GRADE FROM DUAL;
+
+GRADE
+------
+O
+
+SQL> SELECT FIND_GRADE(75) AS GRADE FROM DUAL;
+
+GRADE
+------
+A
+
+SQL> SELECT STUDENT_ID, STUDENT_NAME, MARKS,
+     FIND_GRADE(MARKS) AS GRADE
+     FROM STUDENT;
+
+STUDENT_ID    STUDENT_NAME   MARKS   GRADE
+----------    ------------   -----   -----
+101           ARUN            85      A+
+102           BALA            72      A
+103           DIVYA           91      O
+
+SQL> SELECT OBJECT_NAME, OBJECT_TYPE
+     FROM USER_OBJECTS
+     WHERE OBJECT_TYPE = 'PROCEDURE';
+
+OBJECT_NAME       OBJECT_TYPE
+-------------     -----------
+GET_STUDENT       PROCEDURE
+
+SQL> SELECT OBJECT_NAME, OBJECT_TYPE
+     FROM USER_OBJECTS
+     WHERE OBJECT_TYPE = 'FUNCTION';
+
+OBJECT_NAME       OBJECT_TYPE
+-------------     -----------
+FIND_GRADE        FUNCTION
+
+SQL> CREATE TABLE EMPLOYEE
+     (
+     EMP_ID NUMBER(5) PRIMARY KEY,
+     EMP_NAME VARCHAR2(30),
+     SALARY NUMBER(8)
+
+     );
+
+Table created.
+
+SQL> CREATE TABLE EMP_AUDIT
+     (
+     AUDIT_ID NUMBER(5),
+     EMP_ID NUMBER(5),
+     ACTION_PERFORMED VARCHAR2(20),
+     ACTION_DATE DATE
+     );
+
+Table created.
+
+SQL> INSERT INTO EMPLOYEE VALUES (101,'ARUN',35000);
+SQL> INSERT INTO EMPLOYEE VALUES (102,'BALA',40000);
+SQL> COMMIT;
+
+1 row created.
+1 row created.
+SQL> Commit complete.
+
+SQL> CREATE OR REPLACE TRIGGER TRG_EMP_INSERT
+     AFTER INSERT
+     ON EMPLOYEE
+     FOR EACH ROW
+SQL> BEGIN
+SQL> INSERT INTO EMP_AUDIT
+     VALUES (EMP_AUDIT_SEQ.NEXTVAL, :NEW.EMP_ID, 'INSERT', SYSDATE);
+END;
+
+Trigger created.
+
+SQL> Create the supporting sequence for the audit ID:
+
+SQL> CREATE SEQUENCE EMP_AUDIT_SEQ
+     START WITH 1
+
+     INCREMENT BY 1;
+
+Sequence created.
+
+SQL> INSERT INTO EMPLOYEE VALUES (103,'DIVYA',45000);
+
+1 row created.
+
+SQL> SELECT * FROM EMP_AUDIT;
+
+AUDIT_ID      EMP_ID     ACTION_PERFORMED   ACTION_DATE
+--------      ------     ----------------   -----------
+1             103        INSERT             25-JUL-26
+
+SQL> CREATE OR REPLACE TRIGGER TRG_EMP_UPDATE
+     AFTER UPDATE
+     ON EMPLOYEE
+     FOR EACH ROW
+SQL> BEGIN
+SQL> INSERT INTO EMP_AUDIT
+     VALUES (EMP_AUDIT_SEQ.NEXTVAL, :NEW.EMP_ID, 'UPDATE', SYSDATE);
+END;
+
+Trigger created.
+
+SQL> UPDATE EMPLOYEE
+SQL> SET SALARY = 50000
+     WHERE EMP_ID = 101;
+
+1 row updated.
+
+SQL> SELECT * FROM EMP_AUDIT;
+
+AUDIT_ID      EMP_ID     ACTION_PERFORMED   ACTION_DATE
+--------      ------     ----------------   -----------
+1             103        INSERT             25-JUL-26
+2             101        UPDATE             25-JUL-26
+
+SQL> CREATE OR REPLACE TRIGGER TRG_EMP_DELETE
+     AFTER DELETE
+     ON EMPLOYEE
+     FOR EACH ROW
+SQL> BEGIN
+SQL> INSERT INTO EMP_AUDIT
+     VALUES (EMP_AUDIT_SEQ.NEXTVAL, :OLD.EMP_ID, 'DELETE', SYSDATE);
+END;
+
+Trigger created.
+
+SQL> DELETE FROM EMPLOYEE
+     WHERE EMP_ID = 102;
+
+1 row deleted.
+
+SQL> SELECT * FROM EMP_AUDIT;
+
+AUDIT_ID      EMP_ID     ACTION_PERFORMED   ACTION_DATE
+--------      ------     ----------------   -----------
+1             103        INSERT             25-JUL-26
+2             101        UPDATE             25-JUL-26
+3             102        DELETE             25-JUL-26
+
+Display the EMPLOYEE Table
+
+SQL> SELECT * FROM EMPLOYEE;
+
+EMP_ID     EMP_NAME      SALARY
+------     --------      -------
+101        ARUN           50000
+
+103      DIVYA         45000
+
+Pseudorecord               Purpose
+
+:NEW                       Refers to the new values during INSERT and UPDATE operations
+
+:OLD                       Refers to the old values during DELETE and UPDATE operations
+
+──────────────────────────────────────────────────────────────────────────────
+
+SQL> CREATE TABLE EMPLOYEE
+     (
+     EMP_ID NUMBER(5) PRIMARY KEY,
+     EMP_NAME VARCHAR2(30),
+     DEPARTMENT VARCHAR2(20),
+     SALARY NUMBER(8)
+     );
+
+Table created.
+
+SQL> INSERT INTO EMPLOYEE VALUES (101,'ARUN','CSE',35000);
+
+SQL> INSERT INTO EMPLOYEE VALUES (102,'BALA','ECE',32000);
+SQL> INSERT INTO EMPLOYEE VALUES (103,'DIVYA','IT',45000);
+SQL> INSERT INTO EMPLOYEE VALUES (104,'KAVI','CSE',40000);
+SQL> COMMIT;
+
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+SQL> Commit complete.
+
+     Part A – Implicit Cursor
+
+SQL> SET SERVEROUTPUT ON;
+
+SQL> BEGIN
+SQL> UPDATE EMPLOYEE
+SQL> SET SALARY = SALARY + 5000
+     WHERE DEPARTMENT = 'CSE';
+
+SQL> COMMIT;
+END;
+
+PL/SQL procedure successfully completed.
+
+SQL> SELECT * FROM EMPLOYEE;
+
+EMP_ID     EMP_NAME    DEPARTMENT     SALARY
+------     --------    ----------     -------
+101        ARUN        CSE             40000
+102        BALA        ECE             32000
+103        DIVYA       IT              45000
+104        KAVI        CSE             45000
+
+Attribute                       Description
+
+SQL%FOUND                       Returns TRUE if rows were affected
+
+SQL%NOTFOUND                    Returns TRUE if no rows were affected
+
+SQL%ROWCOUNT                     Returns the number of rows affected
+
+SQL%ISOPEN                       Always returns FALSE for implicit cursors
+
+Part B – Explicit Cursor
+
+SQL> SET SERVEROUTPUT ON;
+
+SQL> DECLARE
+     CURSOR EMP_CURSOR IS
+SQL> SELECT EMP_ID, EMP_NAME, DEPARTMENT, SALARY
+     FROM EMPLOYEE;
+
+V_ID EMPLOYEE.EMP_ID%TYPE;
+V_NAME EMPLOYEE.EMP_NAME%TYPE;
+V_DEPT EMPLOYEE.DEPARTMENT%TYPE;
+V_SAL EMPLOYEE.SALARY%TYPE;
+SQL> BEGIN
+     OPEN EMP_CURSOR;
+LOOP
+FETCH EMP_CURSOR INTO V_ID, V_NAME, V_DEPT, V_SAL;
+EXIT WHEN EMP_CURSOR%NOTFOUND;
+
+DBMS_OUTPUT.PUT_LINE(V_ID || ' ' || V_NAME || '                  ' ||
+V_DEPT || ' ' || V_SAL);
+END LOOP;
+CLOSE EMP_CURSOR;
+END;
+
+PL/SQL procedure successfully completed.
+
+SQL> SET SERVEROUTPUT ON;
+
+SQL> DECLARE
+     CURSOR EMP_CURSOR IS
+SQL> SELECT EMP_ID, EMP_NAME, SALARY
+     FROM EMPLOYEE;
+SQL> BEGIN
+     FOR EMP_REC IN EMP_CURSOR LOOP
+     DBMS_OUTPUT.PUT_LINE(EMP_REC.EMP_ID || ' ' ||
+     EMP_REC.EMP_NAME || ' ' ||
+     EMP_REC.SALARY);
+END LOOP;
+END;
+
+PL/SQL procedure successfully completed.
+
